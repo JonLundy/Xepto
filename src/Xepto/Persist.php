@@ -1,7 +1,6 @@
 <?php namespace Xepto;
 
 use Predis;
-require 'vendor/Predis/Predis.php';
 
 //! ----------- [ Persist ] ----------------
 
