@@ -2,7 +2,7 @@
 
 use Xepto;
 
-set_include_path(get_include_path().':vendor/cas/source/');
+set_include_path(get_include_path().':vendor/phpCAS/source/');
 require_once 'CAS.php';
 
 class Logout {
