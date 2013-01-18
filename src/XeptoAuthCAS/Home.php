@@ -13,15 +13,11 @@ class Home {
         echo '<a href="/auth.logout">Logout</a><br/>';
         
      } 
-    public function options()
-        {
-            
-        } 
+
     public function post()
      {
         
          echo $this->request->raw();
          
      }    
-     
 }
