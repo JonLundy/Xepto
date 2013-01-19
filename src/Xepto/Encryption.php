@@ -8,7 +8,7 @@
  * Note that this is not just straight encryption.  It also has a few other
  *  features in it to make the encrypted data far more secure.  Note that any
  *  other implementations used to decrypt data will have to do the same exact
- *  operations.  
+ *  operations.
  *
  * Security Benefits:
  *
@@ -17,8 +17,8 @@
  * - Does HMAC verification of source data
  *
  */
-class Encryption {
-
+class Encryption
+{
     /**
      * @var string $cipher The mcrypt cipher to use for this instance
      */
@@ -35,7 +35,8 @@ class Encryption {
      * @param string $cipher The MCRYPT_* cypher to use for this instance
      * @param int    $mode   The MCRYPT_MODE_* mode to use for this instance
      */
-    public function __construct($cipher, $mode) {
+    public function __construct($cipher, $mode)
+    {
         $this->cipher = $cipher;
         $this->mode = $mode;
     }
@@ -45,11 +46,12 @@ class Encryption {
      *
      * @param string $data The encrypted datat to decrypt
      * @param string $key  The key to use for decryption
-     * 
+     *
      * @returns string|false The returned string if decryption is successful
      *                           false if it is not
      */
-    public function decrypt($data, $key) {
+    public function decrypt($data, $key)
+    {
 //        $key = $this->stretch($key);                           //! The key comes pre "streched"
         $iv = $this->getIv($data, $key);
         if ($iv === false) {
@@ -64,18 +66,20 @@ class Encryption {
         if ($hmac != hash_hmac('sha1', $data, $key)) {
             return false;
         }
+
         return $data;
     }
 
     /**
      * Encrypt the supplied data using the supplied key
-     * 
+     *
      * @param string $data The data to encrypt
      * @param string $key  The key to encrypt with
      *
      * @returns string The encrypted data
      */
-    public function encrypt($data, $key) {
+    public function encrypt($data, $key)
+    {
 //        $key = $this->stretch($key);                              //! The key comes pre "streched"
         $data = hash_hmac('sha1', $data, $key) . ':' . $data;
 
@@ -90,8 +94,10 @@ class Encryption {
      *
      * @returns string The initialization vector
      */
-    protected function generateIv() {
+    protected function generateIv()
+    {
         $size = mcrypt_get_iv_size($this->cipher, $this->mode);
+
         return mcrypt_create_iv($size, MCRYPT_RAND);
     }
 
@@ -99,15 +105,16 @@ class Encryption {
      * Extract a stored initialization vector from an encrypted string
      *
      * This will shorten the $data pramater by the removed vector length.
-     * 
+     *
      * @see Encryption::storeIv()
      *
      * @param string &$data The encrypted string to process.
-     * @param string $key   The supplied key to extract the IV with
+     * @param string $key The supplied key to extract the IV with
      *
      * @returns string The initialization vector that was stored
      */
-    protected function getIv(&$data, $key) {
+    protected function getIv(&$data, $key)
+    {
         $size = mcrypt_get_iv_size($this->cipher, $this->mode);
         $iv = '';
         for ($i = $size - 1; $i >= 0; $i--) {
@@ -118,6 +125,7 @@ class Encryption {
         if (strlen($iv) != $size) {
             return false;
         }
+
         return $iv;
     }
 
@@ -126,7 +134,7 @@ class Encryption {
      *
      * We will need the IV later to decrypt the data, so we need to
      * make it available.  We don't want to just append it, since that
-     * could open MITM style attacks on the data.  So we'll hide it 
+     * could open MITM style attacks on the data.  So we'll hide it
      * using the key to determine exactly how to hide it.  That way,
      * without knowing the key, it should be impossible to get the IV.
      *
@@ -136,11 +144,13 @@ class Encryption {
      *
      * @returns string The $data parameter with the hidden IV
      */
-    protected function storeIv($data, $iv, $key) {
+    protected function storeIv($data, $iv, $key)
+    {
         for ($i = 0; $i < strlen($iv); $i++) {
             $offset = hexdec($key[$i]);
             $data = substr_replace($data, $iv[$i], $offset, 0);
         }
+
         return $data;
     }
 
@@ -153,7 +163,7 @@ class Encryption {
      * an arbitrary key of any length to be used for encryption.
      *
      * Another benefit of streching the kye is that it actually slows
-     * down any potential brute force attacks. 
+     * down any potential brute force attacks.
      *
      * We use 5000 runs for the stretching since it's a good balance
      * between brute force protection and system load.  We could increase
@@ -165,12 +175,14 @@ class Encryption {
      *
      * @returns string A 40 character hex string with the stretched key
      */
-    protected function stretch($key) {
+    protected function stretch($key)
+    {
         $hash = sha1($key);
         $runs = 0;
         do {
             $hash = hash_hmac('sha1', $hash, $key);
         } while ($runs++ < 5000);
+
         return $hash;
     }
 

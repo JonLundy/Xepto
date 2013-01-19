@@ -2,10 +2,10 @@
 
 //!--- [ response ] --------------
 
-class Response 
+class Response
  {
     use DependancyInjector;
-    
+
     public function set($headers)
       {
           if (empty($headers)) return;

@@ -9,7 +9,7 @@ class Persist
     use DependancyInjector;
 
     protected $redis;
-    
+
     public function init()
      {
         $this->redis  = new Predis\Client($this->config->db->toArray());
@@ -34,14 +34,14 @@ class Persist
     public function get($key)
      {
          return $this->redis->get($key);
-     }    
+     }
     public function set($key, $value)
      {
          return $this->redis->set($key, $value);
-     }    
+     }
     public function setex($key, $value, $expire)
      {
          return $this->redis->setex($key, $expire, $value);
-     }    
+     }
 
  }

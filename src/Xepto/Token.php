@@ -17,7 +17,7 @@ class Token
         $config = $this->config;
         $this->enc = new Encryption(MCRYPT_BlOWFISH, MCRYPT_MODE_CBC);
 
-        $environment_key = isset($config['environment_key']) ? $config['environment_key'] : 'ENC_KEY';   
+        $environment_key = isset($config['environment_key']) ? $config['environment_key'] : 'ENC_KEY';
 
         $this->key = $this->request->server($environment_key);
         $this->cookie = isset($config['cookie']) ? $config['cookie'] : [
@@ -71,39 +71,40 @@ class Token
 
         return [ $aspect, $ident, $ticket ];
      }
-     
-	public function loadIdent($data) 
-	 {	
-	 	$ident = [
+
+    public function loadIdent($data)
+     {
+         $ident = [
             'a' => 'X',
-    	 	'u' => '*',
-    	 	'e' => null,	 	
-    	 	'c' => 'X', 
-    		'n' => null, 
-    		't' => uniqid('HRIT'),
-    	];	
-	
-		if (array_key_exists('c', $data))
-			$ident['c']  = $data['c'];
+             'u' => '*',
+             'e' => null,
+             'c' => 'X',
+            'n' => null,
+            't' => uniqid('HRIT'),
+        ];
+
+        if (array_key_exists('c', $data))
+            $ident['c']  = $data['c'];
 
         if (array_key_exists('a', $data))
-			$ident['a']  = $data['a'];
-        else 
-			$ident['a']  = $ident['c'];
-            
-		if (array_key_exists('u', $data))
-			$ident['u']  = $data['u'];
+            $ident['a']  = $data['a'];
+        else
+            $ident['a']  = $ident['c'];
 
-		if (array_key_exists('e', $data))
-			$ident['e']  = $data['e'];
+        if (array_key_exists('u', $data))
+            $ident['u']  = $data['u'];
 
-		if (array_key_exists('t', $data))
-			$ident['t']  = $data['t'];
+        if (array_key_exists('e', $data))
+            $ident['e']  = $data['e'];
 
-		$this->params = $ident;	
-		return $this;
-	 }
-	 
+        if (array_key_exists('t', $data))
+            $ident['t']  = $data['t'];
+
+        $this->params = $ident;
+
+        return $this;
+     }
+
     public function getToken()
      {
          $params = $this->params;
@@ -176,14 +177,12 @@ class Token
 
             $param_str = $this->decodeString($token);
             $params    = $this->decodeParams($param_str);
-            
+
             if ($params === false) {
                 $params = [ 'a' => 'X', 'u' => 'X', 'c' => 'X' ];
-            }
-            else if (!$this->checkTicket($params['t'])) {
+            } elseif (!$this->checkTicket($params['t'])) {
                 $params = [ 'a' => 'E', 'u' => 'E', 'c' => 'E' ];
-            }
-            else if (isset($params['e'])) {
+            } elseif (isset($params['e'])) {
                 if ($params['e'] < mktime()) {
                     $params = [ 'a' => 'E', 'u' => 'E', 'c' => 'E' ];
                 }
@@ -198,8 +197,6 @@ class Token
         if (!isset($params['c'])) $params['c'] = '~';
 
         if ($params['c'] == '*') $params['a'] = '*';
-        
-
         return $params;
      }
 
@@ -214,18 +211,18 @@ class Token
         else $val = 'X';
         return $val;
      }
-    public function checkTicket($ticket) 
+    public function checkTicket($ticket)
      {
          return $this->persist->get('TREVOKE'.$ticket) == null;
-     } 
-    public function revokeTicket($ticket) 
+     }
+    public function revokeTicket($ticket)
      {
          return $this->persist->setex('TREVOKE'.$ticket, 1, 86400);
-     } 
+     }
     public function __toString()
-	 {
-	 	$token = $this->getToken();
-	 	if ($token === false) return 'deleted';
-	 	return $token;
-	 }    
+     {
+         $token = $this->getToken();
+         if ($token === false) return 'deleted';
+         return $token;
+     }
 }

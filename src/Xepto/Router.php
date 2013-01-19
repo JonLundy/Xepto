@@ -1,15 +1,16 @@
 <?php namespace Xepto;
 
-class Router {
+class Router
+{
     use DependancyInjector;
-    
+
     public function init()
      {
         $this->routes   = $this->config['routes'];
      }
 
     public function run($config)
-     { 
+     {
         $route  = $this->request->server('DOCUMENT_URI');
         $method = strtolower($this->request->server('REQUEST_METHOD'));
 
@@ -20,7 +21,6 @@ class Router {
         $app = new $route_class($config, $this->request, $this->response, $this->token);
 
         if (!method_exists($app, $method)) return $this->response->deny(405);
-
         return $app->$method();
      }
 }
