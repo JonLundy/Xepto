@@ -2,7 +2,7 @@
 
 //!-- [ Trait: DependancyInjector ] --------
 
-trait DependancyInjector
+trait DependencyInjector
 {
     protected $config;
     protected $request;

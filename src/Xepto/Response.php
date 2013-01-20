@@ -4,7 +4,7 @@
 
 class Response
  {
-    use DependancyInjector;
+    use DependencyInjector;
 
     public function set($headers)
       {

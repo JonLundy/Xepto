@@ -4,7 +4,7 @@
 
 class Token
 {
-    use DependancyInjector;
+    use DependencyInjector;
 
     protected $key;
     protected $iv;

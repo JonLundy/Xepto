@@ -2,7 +2,7 @@
 
 class Router
 {
-    use DependancyInjector;
+    use DependencyInjector;
 
     public function init()
      {

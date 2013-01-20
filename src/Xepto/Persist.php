@@ -6,7 +6,7 @@ use Predis;
 
 class Persist
  {
-    use DependancyInjector;
+    use DependencyInjector;
 
     protected $redis;
 
