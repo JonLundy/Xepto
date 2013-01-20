@@ -6,7 +6,7 @@ use Xepto;
 
 class Rules
  {
-    use Xepto\DependancyInjector;
+    use Xepto\DependencyInjector;
 
     protected $allow_anon = false;
 

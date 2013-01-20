@@ -6,7 +6,7 @@ use Xepto;
 
 class CORS
 {
-  use Xepto\DependancyInjector;
+  use Xepto\DependencyInjector;
 
   protected $allowed;
   protected $max_age;
