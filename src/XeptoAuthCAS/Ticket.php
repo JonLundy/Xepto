@@ -7,7 +7,7 @@ require_once 'CAS.php';
 
 class Ticket
 {
-    use Xepto\DependancyInjector;
+    use Xepto\DependencyInjector;
 
     public function get()
      {

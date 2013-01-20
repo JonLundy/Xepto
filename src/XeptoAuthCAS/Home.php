@@ -4,7 +4,7 @@ use Xepto;
 
 class Home
 {
-    use Xepto\DependancyInjector;
+    use Xepto\DependencyInjector;
 
     public function get()
      {
