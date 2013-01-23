@@ -1,1 +1,8 @@
 .svn
+.DS_Store
+/src/Xepto/Config.php
+/src/Xepto/DependencyBuilder.php
+/src/Xepto/DependencyInjector.php
+/src/Xepto/Request.php
+/src/Xepto/Response.php
+/src/Xepto/Router.php

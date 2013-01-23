@@ -1,8 +1,10 @@
-<?php namespace Xepto;
+<?php namespace Xepto\Request;
+
+use Xepto\Dependency as Dependency;
 
 class Router
 {
-    use DependencyInjector;
+    use Dependency\Injector;
 
     public function init()
      {

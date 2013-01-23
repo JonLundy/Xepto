@@ -1,8 +1,8 @@
-<?php namespace Xepto;
+<?php namespace Xepto\Dependency;
 
 //!-- [ Trait: DependancyInjector ] --------
 
-trait DependencyInjector
+trait Injector
 {
     protected $config;
     protected $request;

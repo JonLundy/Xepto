@@ -1,10 +1,10 @@
-<?php namespace Xepto;
+<?php namespace Xepto\Dependency;
 
 //!-- [ Class: DependancyBuilder ] --------
 
-class DependencyBuilder
+class Builder
 {
-    use DependencyInjector;
+    use Injector;
 
     public function init()
      {

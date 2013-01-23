@@ -1,4 +1,4 @@
-<?php namespace Xepto;
+<?php namespace Xepto\Request;
 
 //!--- [ Request ] --------------
 
