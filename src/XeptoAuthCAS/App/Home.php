@@ -13,6 +13,8 @@ class Home
         echo '<a href="/auth.login">Login</a><br/>';
         echo '<a href="/auth.logout">Logout</a><br/>';
 
+        echo $this->config->cas['ca'];
+
      }
 
     public function post()

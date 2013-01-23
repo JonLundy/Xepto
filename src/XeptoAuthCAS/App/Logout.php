@@ -16,6 +16,7 @@ class Logout
         $cas_host = $config->cas->host;
         $cas_port = $config->cas->port;
         $cas_ctx  = $config->cas->ctx;
+        $cas_ca   = $config->cas->ca;
 
         $referer = $this->request->header('Referer', null);
         if ($referer !== null) {
@@ -37,7 +38,9 @@ class Logout
         $this->token->setCookie(false);
 
         \phpCAS::client(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_ctx, false);
-//		\phpCAS::setNoCasServerValidation();
+        \phpCAS::setCasServerCACert($cas_ca, false);
+
+		\phpCAS::setNoCasServerValidation();
         \phpCAS::logoutWithRedirectService($callback);
      }
 }

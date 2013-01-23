@@ -16,6 +16,7 @@ class Ticket
         $cas_host = $config->cas->host;
         $cas_port = $config->cas->port;
         $cas_ctx  = $config->cas->ctx;
+        $cas_ca   = $config->cas->ca;
         $allow_list = $config->allow->toArray();
 
         $renew = $this->request->get('renew', false);
@@ -24,7 +25,9 @@ class Ticket
         $ticket = $this->request->get('ticket', $ticket);
 
         \phpCAS::client(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_ctx, false);
-        \phpCAS::setNoCasServerValidation();
+        \phpCAS::setCasServerCACert($cas_ca, false);
+
+//        \phpCAS::setNoCasServerValidation();
         \phpCAS::setNoClearTicketsFromUrl();
 
         if (!$renew && \phpCAS::isAuthenticated()) {
@@ -63,7 +66,7 @@ class Ticket
 
     public function post()
      {
-        error_log('Signout Detected');
+     //   error_log('Signout Detected');
 
         $xml = $this->request->post('logoutRequest');
         $xml = simplexml_load_string ($xml);
