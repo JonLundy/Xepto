@@ -1,12 +1,12 @@
-<?php namespace XeptoCheck;
+<?php namespace XeptoCheck\Token;
 
-use Xepto\Dependency as Dependency;
+use Xepto;
 
 //!--- [ Token ] --------------
 
 class Token
 {
-    use Dependency\Injector;
+    use Xepto\Dependency\Injector;
 
     protected $key;
     protected $iv;

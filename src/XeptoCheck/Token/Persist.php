@@ -1,14 +1,14 @@
 <?php namespace XeptoCheck\Token;
 
 use Predis;
-use Xepto\Dependency as Dependency;
+use Xepto;
 
 
 //! ----------- [ Persist ] ----------------
 
 class Persist
  {
-    use Dependency\Injector;
+    use Xepto\Dependency\Injector;
 
     protected $redis;
 

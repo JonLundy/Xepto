@@ -10,7 +10,7 @@ require 'Xepto/include/get_headers.php';
 require 'Xepto/include/get_query.php';
 require 'Xepto/include/get_autoloader.php';
 
-$request  = new Xepto\Request  ();
+$request  = new Xepto\Request\Request  ();
 
 $env = $request->server('APP_ENV');
 
@@ -18,7 +18,7 @@ $config = new Xepto\Config\Config();
 $config->merge(require "Xepto/config/request.$env.php");
 $config->merge(require "XeptoCheck/config/check.$env.php");
 
-$response = new Xepto\Response ($config->response, $request);
+$response = new Xepto\Request\Response ($config->response, $request);
 
 $persist    = new XeptoCheck\Token\Persist   ($config->persist);
 $encryption = new XeptoCheck\Token\Encryption(MCRYPT_BlOWFISH, MCRYPT_MODE_CBC);
