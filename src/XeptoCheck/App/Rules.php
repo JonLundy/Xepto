@@ -1,12 +1,13 @@
-<?php namespace XeptoCheck;
+<?php namespace XeptoCheck\App;
 
-use Xepto;
+use Xepto\Dependency as Dependency;
+
 
 //!--- [ Rules ] --------------
 
 class Rules
  {
-    use Xepto\DependencyInjector;
+    use Dependency\Injector;
 
     protected $allow_anon = false;
 

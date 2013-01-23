@@ -1,12 +1,12 @@
-<?php namespace XeptoCheck;
+<?php namespace XeptoCheck\App;
 
-use Xepto;
+use Xepto\Dependency as Dependency;
 
 //!--- [ CORS ] --------------
 
 class CORS
 {
-  use Xepto\DependencyInjector;
+  use Dependency\Injector;
 
   protected $allowed;
   protected $max_age;

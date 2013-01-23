@@ -18,12 +18,14 @@ $config = new Xepto\Config();
 $config->merge(require "Xepto/config/request.$env.php");
 $config->merge(require "XeptoCheck/config/check.$env.php");
 
-$persist  = new Xepto\Persist  ($config->persist);
 $response = new Xepto\Response ($config->response, $request);
-$token    = new Xepto\Token    ($config->token,    $request, $response, $persist);
 
-$cors     = new XeptoCheck\CORS     ($config->cors,  $request, $response);
-$rules    = new XeptoCheck\Rules    ($config->rules, $request, $response, $persist, $token);
+$persist    = new XeptoCheck\Token\Persist   ($config->persist);
+$encryption = new XeptoCheck\Token\Encryption(MCRYPT_BlOWFISH, MCRYPT_MODE_CBC);
+$token      = new XeptoCheck\Token\Token     ($config->token, $request, $response, $persist, $encryption);
+
+$cors       = new XeptoCheck\App\CORS        ($config->cors,  $request, $response);
+$rules      = new XeptoCheck\App\Rules       ($config->rules, $request, $response, $persist, $token);
 
 if ($cors->doPreflight())   return $response->allow();
 if (!$rules->checkLimits()) return $response->deny(403);

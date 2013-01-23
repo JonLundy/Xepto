@@ -1,1 +1,4 @@
 .svn
+.DS_Store
+/src/XeptoCheck/CORS.php
+/src/XeptoCheck/Rules.php
