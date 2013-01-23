@@ -1,4 +1,4 @@
-<?php namespace XeptoCheck\Token;
+<?php namespace XeptoAuthToken\Token;
 
 use Predis;
 use Xepto;

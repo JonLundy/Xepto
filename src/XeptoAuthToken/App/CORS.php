@@ -1,4 +1,4 @@
-<?php namespace XeptoCheck\App;
+<?php namespace XeptoAuthToken\App;
 
 use Xepto\Dependency as Dependency;
 

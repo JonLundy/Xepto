@@ -1,7 +1,7 @@
-<?php namespace XeptoCheck;
+<?php namespace XeptoAuthToken;
 
 use Xepto;
-use XeptoCheck;
+use XeptoAuthToken;
 
 chdir($_SERVER['DOCUMENT_ROOT']);
 set_include_path(get_include_path().':lib/');
@@ -19,12 +19,12 @@ $config->merge(require "XeptoCheck/config/check.$env.php");
 
 $response = new Xepto\Request\Response ($config->response, $request);
 
-$persist    = new XeptoCheck\Token\Persist   ($config->persist);
-$encryption = new XeptoCheck\Token\Encryption(MCRYPT_BlOWFISH, MCRYPT_MODE_CBC);
-$token      = new XeptoCheck\Token\Token     ($config->token, $request, $response, $persist, $encryption);
+$persist    = new XeptoAuthToken\Token\Persist   ($config->persist);
+$encryption = new XeptoAuthToken\Token\Encryption(MCRYPT_BlOWFISH, MCRYPT_MODE_CBC);
+$token      = new XeptoAuthToken\Token\Token     ($config->token, $request, $response, $persist, $encryption);
 
-$cors       = new XeptoCheck\App\CORS        ($config->cors,  $request, $response);
-$rules      = new XeptoCheck\App\Rules       ($config->rules, $request, $response, $persist, $token);
+$cors       = new XeptoAuthToken\App\CORS        ($config->cors,  $request, $response);
+$rules      = new XeptoAuthToken\App\Rules       ($config->rules, $request, $response, $persist, $token);
 
 if ($cors->doPreflight())   return $response->allow();
 if (!$rules->checkLimits()) return $response->deny(403);

@@ -1,4 +1,4 @@
-<?php namespace XeptoCheck\Token;
+<?php namespace XeptoAuthToken\Token;
 
 /**
  * A class to handle secure encryption and decryption of arbitrary data
