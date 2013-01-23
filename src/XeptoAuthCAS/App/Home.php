@@ -1,10 +1,10 @@
-<?php namespace XeptoAuthCAS;
+<?php namespace XeptoAuthCAS\App;
 
 use Xepto;
 
 class Home
 {
-    use Xepto\DependencyInjector;
+    use Xepto\Dependency\Injector;
 
     public function get()
      {

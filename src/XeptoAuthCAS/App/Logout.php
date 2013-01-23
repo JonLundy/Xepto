@@ -1,4 +1,4 @@
-<?php namespace XeptoAuthCAS;
+<?php namespace XeptoAuthCAS\App;
 
 use Xepto;
 
@@ -7,7 +7,7 @@ require_once 'CAS.php';
 
 class Logout
 {
-    use Xepto\DependencyInjector;
+    use Xepto\Dependency\Injector;
 
     public function get ()
      {
