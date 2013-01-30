@@ -1,7 +1,2 @@
 .svn
 .DS_Store
-/src/XeptoAuthCAS/Home.php
-/src/XeptoAuthCAS/Login.php
-/src/XeptoAuthCAS/Logout.php
-/src/XeptoAuthCAS/Ticket.php
-/src/XeptoAuthCAS/Token.php
