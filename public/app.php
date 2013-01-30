@@ -26,6 +26,7 @@ $token      = new XeptoAuthToken\Token\Token     ($config->token, $request, $res
 $cors       = new XeptoAuthToken\App\CORS        ($config->cors,  $request, $response);
 $rules      = new XeptoAuthToken\App\Rules       ($config->rules, $request, $response, $persist, $token);
 
+
 if ($cors->doPreflight())   return $response->allow();
 if (!$rules->checkLimits()) return $response->deny(403);
 if (!$rules->checkRules())  return $response->deny(403);

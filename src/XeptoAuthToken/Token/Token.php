@@ -72,6 +72,29 @@ class Token
 
         return [ $aspect, $ident, $ticket ];
      }
+    public function loadToken($token)
+     {
+        $aspect = '~';
+        $ident  = '~';
+
+        if ($token !== null) {
+            $this->params = $params = $this->verify_params($token);
+
+            // reduce ident to ~ or int or X
+            $ident  = $this->reduce_val($this->request->get('ident','~'), $params['u']);
+
+            // reduce aspect to ~ or app or X
+            $aspect = $this->request->get('aspect','none');
+            $aspect = $this->request->get('aspect',$params['c']);
+
+            $aspect = $this->reduce_val($aspect, $params['a']);
+            if ($aspect == '*') $aspect = '~';
+        }
+
+        $ticket = !isset($params['t']) ? 'ANON'.$this->request->server('REMOTE_ADDR') : $params['t'];
+
+        return [ $aspect, $ident, $ticket ];
+     } 
 
     public function loadIdent($data)
      {
@@ -181,7 +204,7 @@ class Token
 
             if ($params === false) {
                 $params = [ 'a' => 'X', 'u' => 'X', 'c' => 'X' ];
-            } elseif (!$this->checkTicket($params['t'])) {
+            } elseif (isset($params['t']) && !$this->checkTicket($params['t'])) {
                 $params = [ 'a' => 'E', 'u' => 'E', 'c' => 'E' ];
             } elseif (isset($params['e'])) {
                 if ($params['e'] < mktime()) {
