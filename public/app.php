@@ -15,7 +15,7 @@ $request  = new Xepto\Request\Request  ();
 $env = $request->server('APP_ENV');
 
 $config = new Xepto\Config\Config();
-$config->merge(require "XeptoAuthToken/config/check.$env.php");
+$config->merge(require "config/XeptoAuthToken.$env.php");
 
 $response = new Xepto\Request\Response ($config->response, $request);
 
