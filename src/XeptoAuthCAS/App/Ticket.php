@@ -54,7 +54,7 @@ class Ticket
                 if ($allow === false) {
                      return $this->response->deny(403);
                 }
-            } else $callback = $this->options['default'];
+            } else $callback = $this->config['default'];
 
             return $this->response->set(['Location' => $callback]);
         }
