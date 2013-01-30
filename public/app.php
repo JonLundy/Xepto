@@ -18,8 +18,8 @@ $request  = new Xepto\Request\Request  ();
 $env = $request->server('APP_ENV');
 
 $config = new Xepto\Config\Config();
-$config->merge(require "XeptoAuthToken/config/check.$env.php");
-$config->merge(require "XeptoAuthCAS/config/auth.$env.php");
+$config->merge(require "config/XeptoAuthToken.$env.php");
+$config->merge(require "config/XeptoAuthCAS.$env.php");
 
 
 $response = new Xepto\Request\Response ($config->response, $request);
