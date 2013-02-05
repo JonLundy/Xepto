@@ -43,7 +43,7 @@ class Ticket
 
             $cb = $this->request->get('cb', false);
             if ($cb) {
-                $callback = str_replace('http://', 'https://', $cb);
+                $callback = str_replace('http://', 'https://', urldecode($cb));
 
                 $allow = false;
 

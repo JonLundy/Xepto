@@ -11,7 +11,7 @@ class Login
         $config = $this->config;
         $callback = null;
         $callback = $this->request->header('Referer',$callback);
-        $callback = $this->request->get('cb',$callback);
+        $callback = urldecode($this->request->get('cb',$callback));
 
         if ($callback !== null) {
             $callback = str_replace('http://','https://',$callback);
@@ -32,6 +32,8 @@ class Login
 
         $handler = $config->handler;
 
-        $this->response->set(['Location' => "$handler?cb=$callback"]);
+        $cb = urlencode($callback);
+
+        $this->response->set(['Location' => "$handler?cb=$cb"]);
      }
 }
