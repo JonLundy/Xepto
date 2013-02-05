@@ -1,9 +1,0 @@
-.svn
-.DS_Store
-/src/XeptoCheck/CORS.php
-/src/XeptoCheck/Rules.php
-/src/XeptoCheck/App/CORS.php
-/src/XeptoCheck/App/Rules.php
-/src/XeptoCheck/Token/Encryption.php
-/src/XeptoCheck/Token/Persist.php
-/src/XeptoCheck/Token/Token.php
