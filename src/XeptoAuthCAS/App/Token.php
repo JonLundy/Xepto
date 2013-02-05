@@ -14,7 +14,7 @@ class Token
              $token_str = $this->request->get('access_token');
              $token = $this->token->loadToken($token_str);
 
-             echo yaml_emit($token->getParams());
+             echo yaml_emit($token);
              die();
          }
 
