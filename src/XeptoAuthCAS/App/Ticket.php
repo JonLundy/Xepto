@@ -17,6 +17,8 @@ class Ticket
         $cas_port = $config->cas->port;
         $cas_ctx  = $config->cas->ctx;
         $cas_ca   = $config->cas->ca;
+        $cas_verify = $config->cas->verify;
+        
         $allow_list = $config->allow->toArray();
 
         $renew = $this->request->get('renew', false);
@@ -25,9 +27,12 @@ class Ticket
         $ticket = $this->request->get('ticket', $ticket);
 
         \phpCAS::client(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_ctx, false);
-        \phpCAS::setCasServerCACert($cas_ca, false);
 
-//        \phpCAS::setNoCasServerValidation();
+        if ($cas_verify)    
+            \phpCAS::setCasServerCACert($cas_ca, false);
+        else
+            \phpCAS::setNoCasServerValidation();
+
         \phpCAS::setNoClearTicketsFromUrl();
 
         if (!$renew && \phpCAS::isAuthenticated()) {
