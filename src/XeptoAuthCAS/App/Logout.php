@@ -8,6 +8,7 @@ require_once 'CAS.php';
 class Logout
 {
     use Xepto\Dependency\Injector;
+    private $__inject = ['request','token'];
 
     public function get ()
      {
@@ -17,6 +18,7 @@ class Logout
         $cas_port = $config->cas->port;
         $cas_ctx  = $config->cas->ctx;
         $cas_ca   = $config->cas->ca;
+        $cas_verify = $config->cas->verify;
 
         $referer = $this->request->header('Referer', null);
         if ($referer !== null) {
@@ -38,9 +40,10 @@ class Logout
         $this->token->setCookie(false);
 
         \phpCAS::client(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_ctx, false);
-        \phpCAS::setCasServerCACert($cas_ca, false);
-
-		\phpCAS::setNoCasServerValidation();
+        if ($cas_verify)
+            \phpCAS::setCasServerCACert($cas_ca, false);
+        else
+            \phpCAS::setNoCasServerValidation();
         \phpCAS::logoutWithRedirectService($callback);
      }
 }

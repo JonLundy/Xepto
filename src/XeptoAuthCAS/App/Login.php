@@ -5,6 +5,7 @@ use Xepto;
 class Login
 {
     use Xepto\Dependency\Injector;
+    private $__inject = ['request','response'];
 
     public function get()
      {

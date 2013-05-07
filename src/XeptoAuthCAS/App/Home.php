@@ -5,6 +5,7 @@ use Xepto;
 class Home
 {
     use Xepto\Dependency\Injector;
+    private $__inject = ['token'];
 
     public function get()
      {
@@ -14,13 +15,6 @@ class Home
         echo '<a href="/auth.logout">Logout</a><br/>';
 
         echo $this->config->cas['ca'];
-
-     }
-
-    public function post()
-     {
-
-         echo $this->request->raw();
 
      }
 }

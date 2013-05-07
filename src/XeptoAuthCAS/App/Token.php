@@ -5,6 +5,7 @@ use Xepto;
 class Token
 {
     use Xepto\Dependency\Injector;
+    private $__inject = ['request','token'];
 
     public function get ()
      {

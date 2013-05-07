@@ -8,6 +8,7 @@ require_once 'CAS.php';
 class Ticket
 {
     use Xepto\Dependency\Injector;
+    private $__inject = ['request','token','response'];
 
     public function get()
      {
@@ -76,6 +77,6 @@ class Ticket
         $xml = $this->request->post('logoutRequest');
         $xml = simplexml_load_string ($xml);
         $ticket = $xml->children('samlp', true)->SessionIndex;
-          $this->token->revokeTicket($ticket);
+        $this->token->revokeTicket($ticket);
      }
 }
