@@ -5,6 +5,7 @@ use Xepto\Dependency as Dependency;
 class Router
 {
     use Dependency\Injector;
+    private $__inject = ['request','response'];
 
     public function init()
      {
@@ -20,7 +21,7 @@ class Router
 
         if ($route_class === null) return $this->response->deny(404);
 
-        $app = new $route_class($config, $this->request, $this->response, $this->token);
+        $app = new $route_class($config); 
 
         if (!method_exists($app, $method)) return $this->response->deny(405);
         return $app->$method();
