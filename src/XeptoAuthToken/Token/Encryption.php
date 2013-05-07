@@ -35,10 +35,10 @@ class Encryption
      * @param string $cipher The MCRYPT_* cypher to use for this instance
      * @param int    $mode   The MCRYPT_MODE_* mode to use for this instance
      */
-    public function __construct($cipher, $mode)
-    {
-        $this->cipher = $cipher;
-        $this->mode = $mode;
+    public function __construct($config)
+    {    
+        $this->cipher = $config->cipher;
+        $this->mode   = $config->mode;
     }
 
     /**
