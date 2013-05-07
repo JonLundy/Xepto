@@ -10,11 +10,9 @@ class Persist
  {
     use Xepto\Dependency\Injector;
 
-    protected $redis;
-
     public function init()
      {
-        $this->redis  = new Predis\Client($this->config->db->toArray());
+        $this->__injector($this->config->db);
      }
 
     public function incrCounter ($prefix, $name, $limit, $timeout)

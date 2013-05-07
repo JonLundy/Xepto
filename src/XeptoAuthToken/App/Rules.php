@@ -8,6 +8,7 @@ use Xepto\Dependency as Dependency;
 class Rules
  {
     use Dependency\Injector;
+    private $__inject = ['request','response','persist','token'];    
 
     protected $allow_anon = false;
 

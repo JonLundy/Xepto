@@ -7,6 +7,7 @@ use Xepto\Dependency as Dependency;
 class CORS
 {
   use Dependency\Injector;
+  private $__inject = ['request','response'];
 
   protected $allowed;
   protected $max_age;

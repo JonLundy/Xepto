@@ -7,15 +7,15 @@ use Xepto;
 class Token
 {
     use Xepto\Dependency\Injector;
+    private $__inject = ['request','response','encryption','persist'];
 
     protected $key;
     protected $iv;
     protected $ident;
     protected $params;
-    protected $encryption;
 
     public function init()
-     {
+     {     
         $config = $this->config;
 
         $environment_key = isset($config['environment_key']) ? $config['environment_key'] : 'ENC_KEY';
