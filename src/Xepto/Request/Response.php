@@ -1,7 +1,5 @@
 <?php namespace Xepto\Request;
 
-//!--- [ response ] --------------
-
 use Xepto\Dependency as Dependency;
 
 class Response
@@ -21,7 +19,7 @@ class Response
       {
         $this->set(['Status' => '200 Success']);
 
-        die;
+        return;
       }
 
      function deny ($status)
@@ -33,6 +31,6 @@ class Response
               case 405: $this->set(['Status' => '405 Method not allowed']); break;
           }
 
-          die;
+          return;
       }
  }
