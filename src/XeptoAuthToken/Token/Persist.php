@@ -1,10 +1,6 @@
 <?php namespace XeptoAuthToken\Token;
 
-use Predis;
 use Xepto;
-
-
-//! ----------- [ Persist ] ----------------
 
 class Persist
  {
@@ -12,7 +8,7 @@ class Persist
 
     public function init()
      {
-        $this->__injector($this->config->db);
+        $this->__injector($this->config['db']);
      }
 
     public function incrCounter ($prefix, $name, $limit, $timeout)

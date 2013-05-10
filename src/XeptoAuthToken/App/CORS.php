@@ -1,12 +1,10 @@
 <?php namespace XeptoAuthToken\App;
 
-use Xepto\Dependency as Dependency;
-
-//!--- [ CORS ] --------------
+use Xepto;
 
 class CORS
 {
-  use Dependency\Injector;
+  use Xepto\Dependency\Injector;
   private $__inject = ['request','response'];
 
   protected $allowed;
@@ -16,9 +14,9 @@ class CORS
   public function init()
   {
       $config = $this->config;
-      $this->max_age = isset($config['max_age']) ? $config['max_age'] : null;
-      $this->allowed = isset($config['allowed']) ? $config['allowed']->toArray() : array() ;
-      $this->methods = isset($config['methods']) ? $config['methods']->toArray() : array();
+      $this->max_age = $config['max_age'] ? $config['max_age'] : null;
+      $this->allowed = $config['allowed'] ? $config['allowed'] : array();
+      $this->methods = $config['methods'] ? $config['methods'] : array();
    }
 
   public function getHeaders()
@@ -48,5 +46,4 @@ class CORS
 
       return false;
    }
-
 }

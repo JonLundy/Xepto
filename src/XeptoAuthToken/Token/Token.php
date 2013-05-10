@@ -2,8 +2,6 @@
 
 use Xepto;
 
-//!--- [ Token ] --------------
-
 class Token
 {
     use Xepto\Dependency\Injector;

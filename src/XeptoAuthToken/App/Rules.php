@@ -14,9 +14,9 @@ class Rules
 
     public function init()
      {
-        $config = $this->config;
-        $this->allow_anon = $config->allow_anon;
-        $this->limits = $config->limits->toArray();
+        $config           = $this->config;
+        $this->allow_anon = $config['allow_anon'];
+        $this->limits     = $config['limits'];
      }
 
     public function checkLimits()
