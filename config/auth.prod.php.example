@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'router' => [
+        'routes' => [
+            '/auth.login'  => '\XeptoAuthCAS\Login',
+            '/auth.logout' => '\XeptoAuthCAS\Logout',
+            '/auth.ticket' => '\XeptoAuthCAS\Ticket',
+            '/auth.token'  => '\XeptoAuthCAS\Token',
+            '/auth.home'   => '\XeptoAuthCAS\Home',
+        ],
+    ],
+    'app' => [
+        'cas' => [
+            'host'    => 'cas.example.com',
+            'port'    => 443,
+            'ctx' => '/cas',
+        ],
+        'default' => 'https://example.com',
+        'allow' => [ 
+            'https://example.com',
+         ],   
+         'handler' => 'https://example.com/auth.ticket',    
+    ],
+];
