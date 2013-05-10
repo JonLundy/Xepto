@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'cors' => [
+        'max_age' => 3600,
+        'methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        'allowed' => [
+            'https://example.com',
+            'https://api.example.com',
+        ]
+    ],
+    'rules' => [
+        'limits' => [
+            [ 'prefix'  => 'RLIMIT',
+              'header'  => 'X-Request-Limit',
+              'limit'   => 3000,
+              'timeout' => 3600, ],
+            [ 'prefix'  => 'FLOOD',
+              'header'  => 'X-Flood-Limit',
+              'limit'   => 500,
+              'timeout' => 1, ]
+        ],
+        'allow_anon' => 'true',
+    ],
+];
