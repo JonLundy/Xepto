@@ -63,7 +63,7 @@ if (isset($_SERVER['HTTP_CONTENT_TYPE'])) {
             $_POST = array_merge_recursive($files, $params);
         }    
         break;
-    default: 
+    default:
         parse_str($_RAWPOST, $_POST);
     }
 }

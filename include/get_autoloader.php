@@ -18,6 +18,9 @@ function autoload($className)
 
     $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 
-    require $fileName;
+    @include $fileName;
+    
+    return true;
+    
 }
 spl_autoload_register('\Xepto\autoload');

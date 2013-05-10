@@ -4,7 +4,7 @@ class Config implements \ArrayAccess
  {
     protected $store;
     protected $classes;
-    public $root;
+    protected $root;
 
     public function __construct($config = null, $root = null)
      {
@@ -15,54 +15,36 @@ class Config implements \ArrayAccess
      }
 
     public function merge($config)
-     {
-        $this->store = array_replace_recursive($this->store, $config);
-     }
+     { $this->store = array_replace_recursive($this->store, $config); }
 
-    public function toArray()
-     {
-         return $this->store;
-     }
+    public function val()     { return $this->store; }
+    public function toArray() { return $this->store; }
 
     public function __get($name)
      {
-         if (is_array($this->store)) {
-             if (array_key_exists($name,$this->store)) {
-                if (is_array($this->store[$name]))
-                     return new Config($this->store[$name], $this->root);
-                else return $this->store[$name];
-             }
-         } else return $this->store;
-
-         return null;
+        if (array_key_exists($name, $this->store)) {
+            if (is_array($this->store[$name]))
+                 return new Config($this->store[$name], $this->root);
+            else return $this->store[$name];
+        }
+        return null;
      }
 
     // ArrayAccess Items
-    public function offsetSet($offset, $value)
-     {
-        // Config is Read-Only.
-     }
+    public function offsetSet($offset, $value) {}     // Config is Read-Only.
+
+    public function offsetUnset($offset) {}           // Config is Read-Only.
 
     public function offsetExists($offset)
-     {
-        return array_key_exists($offset,$this->store);
-     }
-
-    public function offsetUnset($offset)
-     {
-        // Config is Read-Only.
-     }
+     { return array_key_exists($offset, $this->store); }
 
     public function offsetGet($offset)
-     {
-        return $this->__get($offset);
-     }
+     { return array_key_exists($offset, $this->store) ? $this->store[$offset] : null; }
      
-    // Used for class object injection. 
+    // Class object generation & injection. 
     public function storeClass($name, $class) 
-     {
-         $this->root->classes[$name] = $class;
-     } 
+     { $this->root->classes[$name] = $class; } 
+     
     public function getClass($name) 
      {
         if (array_key_exists($name, $this->root->classes))
@@ -78,29 +60,27 @@ class Config implements \ArrayAccess
                      
         return $class;             
      } 
+     
     public function buildClass($name, $className = null)
      {
+        $config = $this->root->$name;
+
         if ($className !== null) {
-            $config = $this->root[$name];
             if ($config === null)  
-                $class = new $className ();
-            else
-                $class = new $className ($config);
+                 $class = new $className ();
+            else $class = new $className ($config);
         } else {
-            $config = $this->root[$name];
             $className = $config->__class;
             
             if ($className === null) 
                 return false;
     
             if ($config->__configArray === true)
-                $class = new $className ($config->toArray());
-            else
-                $class = new $className ($config);
+                 $class = new $className ($config->val());
+            else $class = new $className ($config);
         }        
             
         $this->storeClass($name, $class);
-        
         return $class;
      } 
  }
