@@ -1,4 +1,4 @@
-<?php namespace XeptoAuthToken\Token;
+<?php namespace Xepto\Auth\Token;
 
 use Xepto;
 

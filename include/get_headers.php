@@ -1,7 +1,5 @@
 <?php namespace Xepto;
 
-//!--- [ get_headers ] --------------
-
 // Grab header info into a $_HEADER global var.
 if (!function_exists('getallheaders')) {
     function getallheaders()

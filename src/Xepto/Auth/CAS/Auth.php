@@ -1,4 +1,4 @@
-<?php namespace XeptoAuthCAS\App;
+<?php namespace Xepto\Auth\CAS;
 
 use Xepto;
 

@@ -1,10 +1,10 @@
 <?php namespace Xepto\Request;
 
-use Xepto\Dependency as Dependency;
+use Xepto;
 
 class Response
  {
-    use Dependency\Injector;
+    use Xepto\Dependency\Injector;
 
     public function set($headers)
       {

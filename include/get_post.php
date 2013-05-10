@@ -11,9 +11,11 @@ if (isset($_SERVER['HTTP_CONTENT_TYPE'])) {
     case 'application/json': 
         $_POST = json_decode($_RAWPOST,true); 
         break;
+
     case 'text/yaml': 
         $_POST = yaml_parse($_RAWPOST); 
         break;
+
     case 'multipart/form-data': 
         $boundary = null;
         $files = [];
@@ -63,6 +65,7 @@ if (isset($_SERVER['HTTP_CONTENT_TYPE'])) {
             $_POST = array_merge_recursive($files, $params);
         }    
         break;
+
     default:
         parse_str($_RAWPOST, $_POST);
     }
